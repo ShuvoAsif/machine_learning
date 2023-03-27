@@ -31,6 +31,6 @@ csv = open('iphone_price.csv', 'a')
 csv.write('version,price\n')
 
 for key in d:
-    csv.write(f"key, {d[key]}")
+    csv.write(f"{key}, {d[key]}\n")
 
 csv.close
