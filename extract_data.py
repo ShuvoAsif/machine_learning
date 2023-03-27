@@ -8,6 +8,8 @@ table = soup.find('table', class_="wikitable")
 # print(table)
 rows = table.find_all('tr')[1::1]
 
+d = {}
+
 for row in rows:
     data = row.find_all(['th', 'td'])
 
@@ -21,5 +23,14 @@ for row in rows:
         price = price_text.text.split(
             '/')[-1].split('*')[-1].replace('$', '').replace('\n', '')
         print(version, price)
+        d[version] = price
     except:
         pass
+
+csv = open('iphone_price.csv', 'a')
+csv.write('version,price\n')
+
+for key in d:
+    csv.write(f"key, {d[key]}")
+
+csv.close
