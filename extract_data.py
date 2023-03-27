@@ -1,6 +1,3 @@
-# pip install requests
-# pip install beautifulsoup4 lxml
-# [1::1] means start for index1
 import requests
 from bs4 import BeautifulSoup
 url = 'https://en.wikipedia.org/wiki/IPhone'
@@ -18,6 +15,11 @@ for row in rows:
         version_text = data[0].a.text.split('/')[0]
         version_text = ''.join(i for i in version_text if i.isdigit())
         version = int(version_text)
-        print(version)
+        if version < 3:
+            continue
+        price_text = data[8]
+        price = price_text.text.split(
+            '/')[-1].split('*')[-1].replace('$', '').replace('\n', '')
+        print(version, price)
     except:
         pass
